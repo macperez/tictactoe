@@ -17,7 +17,7 @@ TicTacToe::TicTacToe(std::string player1Name, std::string player2Name){
 void TicTacToe::ShowGrid() const { 
     for(const std::array<int, 3> & row: grid_){
         std::cout << "\n\n";
-        for(int val: row)
+        for(const int & val: row)
             switch (val){
             case -1:
                 std::cout << "X\t";
@@ -34,14 +34,15 @@ void TicTacToe::ShowGrid() const {
 }
 
 bool TicTacToe::validCoordinates(int row, int col) const {
-
-    return true; 
+    row--;
+    col--;
+    return  row >= 0 && row < 3 && col >= 0 && col < 3 && grid_[row][col] == 0;   
 }
 
 void TicTacToe::turnPlayer(int numPlayer){
     std::string name = numPlayer == 1 ? player1_.name:player2_.name;
     int row, col;
-    std::cout << "Player " << numPlayer << "(" << name << ") turn. Coordinates?\n";
+    std::cout << "\nPlayer " << numPlayer << "(" << name << ") turn. Coordinates?\n";
     
     bool valid = false; 
     
@@ -53,7 +54,7 @@ void TicTacToe::turnPlayer(int numPlayer){
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
         
-    grid_[row][col] = numPlayer == 1 ? 1 :-1;
+    grid_[--row][--col] = numPlayer == 1 ? 1 :-1;
     pos_counter_++;
 }
 
@@ -66,9 +67,9 @@ void TicTacToe::updateStatus(){
     }
         
     // check rows
-    double s = 0.0;
+    int s = 0;
     for(const std::array<int, 3> & row: grid_){
-        s = accumulate(row.begin(), row.end(), 0.0);
+        s = accumulate(row.begin(), row.end(), 0);
         if (s >= 3 ||s <= -3)
             break; 
     }
@@ -79,7 +80,41 @@ void TicTacToe::updateStatus(){
         return; 
     }; 
     
-           
+
+    // check cols
+    for(int col = 0; col < 3; col++){
+        s = 0;
+        for (int row = 0; row < 3; row++)
+            s += grid_[row][col]; 
+
+        if (s >= 3 ||s <= -3)
+            break; 
+    }
+    player1_.win = s == 3;
+    player2_.win = s == -3;
+    if (player1_.win || player2_.win){
+        finished_ = true; 
+        return; 
+    }; 
+    
+    // check main diagonal
+    s = grid_[0][0] + grid_[1][1] + grid_[2][2];
+    player1_.win = s == 3;
+    player2_.win = s == -3;
+    if (player1_.win || player2_.win){
+        finished_ = true; 
+        return; 
+    };
+
+    // check secondary diagonal
+    s = grid_[2][0] + grid_[1][1] + grid_[0][2];
+    player1_.win = s == 3;
+    player2_.win = s == -3;
+    if (player1_.win || player2_.win){
+        finished_ = true; 
+        return; 
+    };
+
 }
 
 
@@ -101,10 +136,10 @@ void TicTacToe::Start() {
     }
 
     if (player1_.win)
-        std::cout << '\n' << player1_.name << " (player 1) has won!!\n";
+        std::cout << "\n\n" << player1_.name << " (player 1) has won!!\n";
     else if (player2_.win)
-        std::cout << '\n' << player1_.name << " has won!!\n";
+        std::cout << "\n\n" << player1_.name << " has won!!\n";
     else
-        std::cout << '\n' << "DRAW!!\n";
+        std::cout << "\n\nDRAW!!\n";
 
 }
