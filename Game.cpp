@@ -1,7 +1,10 @@
 #include <iostream>
 #include <array>
 #include <limits>
+#include <numeric>
 #include "Game.h"
+
+
 
 TicTacToe::TicTacToe(std::string player1Name, std::string player2Name){
     player1_ = {player1Name, false};
@@ -55,16 +58,53 @@ void TicTacToe::turnPlayer(int numPlayer){
 }
 
 void TicTacToe::updateStatus(){
+
+    // check if any movement if possible 
+    if (pos_counter_ == 9){
+        finished_ = true; 
+        return;
+    }
+        
+    // check rows
+    double s = 0.0;
+    for(const std::array<int, 3> & row: grid_){
+        s = accumulate(row.begin(), row.end(), 0.0);
+        if (s >= 3 ||s <= -3)
+            break; 
+    }
+    player1_.win = s == 3;
+    player2_.win = s == -3;
+    if (player1_.win || player2_.win){
+        finished_ = true; 
+        return; 
+    }; 
     
+           
 }
 
 
 void TicTacToe::Start() { 
     std::cout << "Starting game...\n";
 
-    turnPlayer(1);
-    // game loop 
-    //while (true){
-        
-   // }
+    //game loop 
+    while (true){
+        turnPlayer(1); 
+        ShowGrid();
+        updateStatus();
+        if (finished_)
+            break; 
+        turnPlayer(2); 
+        ShowGrid();
+        updateStatus();
+        if (finished_)
+            break; 
+    }
+
+    if (player1_.win)
+        std::cout << '\n' << player1_.name << " (player 1) has won!!\n";
+    else if (player2_.win)
+        std::cout << '\n' << player1_.name << " has won!!\n";
+    else
+        std::cout << '\n' << "DRAW!!\n";
+
 }
