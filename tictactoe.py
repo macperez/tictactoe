@@ -197,12 +197,12 @@ class Game():
         while True:
             self.player1.play(self.board)
             self.board.show()
-            self.update_status_game()
+            self._update_status_game()
             if self.finished:
                 break
             self.player2.play(self.board)
             self.board.show()
-            self.update_status_game()
+            self._update_status_game()
             if self.finished:
                 break
         print("Finish game!!")
@@ -214,7 +214,7 @@ class Game():
             print("The game ended in a draw")
 
         
-    def update_status_game(self):
+    def _update_status_game(self):
      
         if self.board.all_board_filled():
             self.finished = True
