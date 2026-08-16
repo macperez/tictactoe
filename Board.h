@@ -20,7 +20,6 @@ class Board{
         std::vector<std::vector<int>> grid_;
 
         
-        //bool validCoordinates(int row, int col) const;
         //std::vector<int> getLine(int row, int col, Direction direction) const; 
 
 
@@ -28,5 +27,7 @@ class Board{
 
         Board(int size);
         void Show() const; 
-        //void setCoordinates(int row, int col, int value);
+        bool validCoordinates(int row, int col) const;
+        void setCoordinates(int row, int col, int value);
+        int GetSize() const; 
 };

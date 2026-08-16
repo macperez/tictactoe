@@ -36,3 +36,21 @@ void Board::Show() const{
 
 
 } 
+
+
+bool Board::validCoordinates(int row, int col) const {
+    row--;
+    col--;
+    return  row >= 0 && row < size_ && col >= 0 && col < size_ && grid_[row][col] == 0;   
+}
+
+
+int Board::GetSize() const{
+    return size_;
+}
+
+void  Board::setCoordinates(int row, int col, int value){
+    std::cout << "Set coordinates\n";
+    
+
+}

@@ -6,7 +6,7 @@
 
 
 class Player { 
-    private: 
+    protected: 
         std::string name_; 
         bool win_ = false; 
         int number_; 
@@ -14,7 +14,7 @@ class Player {
     public: 
         Player(std::string playerName, int number);
         virtual ~Player() = default;
-        //virtual void Play(Board & board) = 0; 
+        virtual void Play(Board & board) = 0; 
 
 };
 
@@ -23,7 +23,7 @@ class Player {
 class HumanPlayer: public Player {
     public:
         HumanPlayer(std::string name, int number);
-        //void Play(Board & board) override;
+        void Play(Board & board) override;
 
 };
 

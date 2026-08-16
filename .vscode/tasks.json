@@ -1,0 +1,16 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build TicTacToe (debug)",
+            "command": "cmake",
+            "type": "shell",
+            "args": ["--build", "build", "--config", "Debug"],
+        
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": {"kind": "build", "isDefault": true}
+        }
+    ]
+}

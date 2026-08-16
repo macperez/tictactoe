@@ -14,7 +14,7 @@ class TicTacToe{
         std::unique_ptr <Player> player2_; 
             
 
-        //void updateStatus(); 
+        void updateStatus(); 
 
     public: 
         TicTacToe(int size, std::string player1Name, std::string player2Name="computer");
