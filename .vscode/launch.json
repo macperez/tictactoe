@@ -3,11 +3,14 @@
     "configurations": [
         {
             "name": "Run tictactoe (Debug)", 
-            "type": "cppvsdbg",  
+            // "type": "cppvsdbg",  only for windows
+            "type": "cppdbg", // Linux
+            "MIMode": "gdb",  // Linux, delete if you are in windows
             "request": "launch", 
-            "program": "${workspaceFolder}/build/Debug/tictactoe.exe", 
+            //"program": "${workspaceFolder}/build/Debug/tictactoe.exe",  // this path in windows
+            "program": "${workspaceFolder}/build/Tictactoe",  // this path in linux --> omit /Debug/ part of path and find the executable
             "cwd": "${workspaceFolder}",
-            "console": "integratedTerminal", 
+            //"console": "integratedTerminal",  // uncommment only for windows
             "preLaunchTask": "${defaultBuildTask}"
         }
     ]
