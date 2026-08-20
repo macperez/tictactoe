@@ -29,5 +29,15 @@ class Board{
         void Show() const; 
         bool validCoordinates(int row, int col) const;
         void setCoordinates(int row, int col, int value);
+        bool IsComplete() const;
         int GetSize() const; 
+        int CheckRows(int linelength) const; 
+        int CheckCols(int linelength) const; 
+        int CheckMainDiagonals(int linelength) const; 
+        int CheckSecondaryDiagonals(int linelength) const; 
+
+    private: 
+        std::vector<int> getAxis(int row, int col, Direction direction) const;
+        int checkLine(std::vector<int> line, int lineLength) const;
+
 };

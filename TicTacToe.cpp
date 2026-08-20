@@ -3,14 +3,13 @@
 
 
 
-TicTacToe::TicTacToe( int size, std::string player1Name, std::string player2Name):
-    board_(size)
+TicTacToe::TicTacToe( int size, int lineLength, std::string player1Name, std::string player2Name):
+    board_(size), lineLength_(lineLength)
 {
         
         finished_ = false;
         player1_ = std::make_unique<HumanPlayer>(player1Name, 1);  
 
-        std::cout << "Es el humano  " << player2Name << std::endl;
         player2_ =  std::make_unique<HumanPlayer>(player2Name, 2);  
         
         /*
@@ -28,6 +27,19 @@ TicTacToe::TicTacToe( int size, std::string player1Name, std::string player2Name
 
 
 void TicTacToe::updateStatus(){
+    
+    int val; 
+
+    if (board_.IsComplete()){
+        finished_ = true; 
+        return; 
+    }
+
+    val = board_.CheckRows(lineLength_);
+
+    //val = self.board.check_rows(self.line_length)
+
+
 
 }
 
@@ -38,6 +50,7 @@ void TicTacToe::Start() {
     board_.Show();
     // game loop 
     while (true){
+        
         player1_-> Play(board_);
         board_.Show();
         // update status game 
@@ -56,3 +69,52 @@ void TicTacToe::Start() {
 
     }
 }
+
+
+ void PrintLine(std::vector<int>const& line){
+    for(const int & val: line)
+        std::cout << val <<" ";
+    std::cout << std::endl;
+    
+}
+
+
+
+void TicTacToe :: StartTest(){ 
+        // set some points
+        board_.setCoordinates(1 , 1,-1);
+        board_.setCoordinates(1 , 2, -1);
+        board_.setCoordinates(1 , 3, -1);
+
+        board_.setCoordinates(1 , 0, 1);
+        board_.setCoordinates(2 , 0, 1);
+        board_.setCoordinates(3 , 0, 1);
+
+
+        board_.setCoordinates(0 , 2, -1);
+        board_.setCoordinates(1 , 1, -1);
+        board_.setCoordinates(2 , 0, -1);
+
+
+        board_.Show();
+
+        int val = board_.CheckRows(3); 
+        std::cout << "val = " << val << std::endl; 
+
+        val = board_.CheckCols(3);
+        std::cout << "val = " << val << std::endl; 
+
+        val = board_.CheckCols(3);
+        std::cout << "val = " << val << std::endl; 
+    
+        std::cout << "chequeando secundarias \n" << std::endl; 
+        val = board_.CheckSecondaryDiagonals(3);
+        //auto values = board_.getAxis(0, 2, Direction::SECONDARY_DIAGONAL);
+        //PrintLine(values);
+
+        std::cout << "val = " << val << std::endl; 
+
+   
+   
+}
+

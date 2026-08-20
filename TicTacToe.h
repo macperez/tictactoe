@@ -8,7 +8,9 @@
 class TicTacToe{
     private: 
         Board board_;
-                
+
+        int lineLength_; 
+            
         bool finished_;
         std::unique_ptr <Player> player1_; 
         std::unique_ptr <Player> player2_; 
@@ -17,8 +19,9 @@ class TicTacToe{
         void updateStatus(); 
 
     public: 
-        TicTacToe(int size, std::string player1Name, std::string player2Name="computer");
+        TicTacToe(int size, int lineLength, std::string player1Name, std::string player2Name="computer");
         void Start();
+        void StartTest();
         
 
 };

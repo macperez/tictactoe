@@ -56,12 +56,12 @@ class Board:
             return self.grid[row]
         elif axis == RowOrientation.VERTICAL: # vertical
             return [self.grid[row][col] for row in range(n)]
-        elif axis == RowOrientation.mro: # main diagonal
+        elif axis == RowOrientation.MAIN_DIAGONAL: # main diagonal
             steps = min(n - row, n - col)
             return [self.grid[row + s] [col + s] for s in range(steps)]
         # secondary diagonal
-        steps = min(len(self.grid) - row, col)
-        return [self.grid[row + s] [col - s] for s in range(steps + 1)]
+        steps = min(len(self.grid) - row, col + 1 )
+        return [self.grid[row + s] [col - s] for s in range(steps)]
 
     def _check_axis(self, array: list[int], length : int) -> tuple [bool, int]:
         i = 0
@@ -261,19 +261,40 @@ if __name__ == '__main__':
     # let the player choose the grid size:
     print("\n\nTIC-TAC-TOE!")
     print("------------")
-    n = input("Choose the N value (N X N grid): ")
-    lgth = input("Choose the length of the string (tictactoe, for-in-a-row, ...)")
+    #n = input("Choose the N value (N X N grid): ")
+    #lgth = input("Choose the length of the string (tictactoe, for-in-a-row, ...)")
     
-    n = int(n) #make more robust 
-    lgth = int(lgth)
+    #n = int(n) #make more robust 
+    #lgth = int(lgth)
     
-    if lgth >= n:
-        print("The board size must be great that line!")
-    else: 
-        player1_name = input("Player 1:\n")
-        player2_name = input("Player 2(type: enter for computer):\n")
-        if player2_name.strip() == "":
-            player2_name = 'computer'
-        game = Game(player1_name, player2_name, n, lgth)
-        game.start()
-        
+    n = 4 
+    lgth = 3
+    player1_name = "manu"
+    player2_name = "josua"
+
+    # if lgth > n:
+    #     print("The board size must be great that line!")
+    # else: 
+    #     player1_name = input("Player 1:\n")
+    #     player2_name = input("Player 2(type: enter for computer):\n")
+
+    #     if player2_name.strip() == "":
+    #         player2_name = 'computer'
+
+
+    game = Game(player1_name, player2_name, n, lgth)
+    #game.start()
+    #game.board.set_coordinates(0, 0, 1)
+    #game.board.set_coordinates(0, 1, 1)
+    #game.board.set_coordinates(0, 2, 1)
+
+    game.board.set_coordinates(0 , 2, -1);
+    game.board.set_coordinates(1 , 1, -1);
+    game.board.set_coordinates(2 , 0, -1);
+
+
+    game.board.show()
+    line = game.board._get_axis(0, 2, RowOrientation.SECONDARY_DIAGONAL)
+    print (f"line({len(line)}) --> ", line )
+    found, val = game.board._check_axis(line, 3)
+    print (f"found =  {found}, val = {val}")

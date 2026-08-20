@@ -27,7 +27,8 @@ void HumanPlayer::Play(Board & board) {
     int row, col; 
 
     while (true){
-        std::cout << name_ << ", enter coordinates [x] [y]" ;
+        std::cout << "\n\n";
+        std::cout << name_ << ":: [x] [y] = " ;
         std::cin >> row >> col;
         if (board.validCoordinates(row, col)){
             row--; 
