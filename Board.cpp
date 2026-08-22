@@ -129,24 +129,6 @@ int Board::CheckMainDiagonals(int linelength) const{
     return val; 
 } 
 
-/*
-   def check_secondary_diagonals(self, line_length:int) -> int:
-        val = 0
-        for col_index in range(self.N_SIZE):
-            sec_diag_values  = self._get_axis(0, col_index, RowOrientation.SECONDARY_DIAGONAL)
-            found, val = self._check_axis(sec_diag_values, line_length)
-            if found:
-                return val
-        
-        for row_index in range(1, self.N_SIZE):
-            sec_diag_values  = self._get_axis(row_index, 0, RowOrientation.SECONDARY_DIAGONAL)
-            found, val = self._check_axis(sec_diag_values, line_length)
-            if found:
-                break
-        
-        return val
-
-*/
 
 int Board::CheckSecondaryDiagonals(int linelength) const{
     int val = 0; 
