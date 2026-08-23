@@ -26,6 +26,7 @@ TicTacToe::TicTacToe( int size, int lineLength, std::string player1Name, std::st
 }
 
 
+
 void TicTacToe::updateStatus(){
     
     int val; 
@@ -37,7 +38,19 @@ void TicTacToe::updateStatus(){
 
     val = board_.CheckRows(lineLength_);
 
-    //val = self.board.check_rows(self.line_length)
+    if (val == -lineLength_)
+        player1_ -> MakeWinner(); 
+    else if (val == lineLength_)
+        player2_ -> MakeWinner();
+    
+    if (player1_ -> IsWinner() || player2_ -> IsWinner()){
+        finished_ = true; 
+        return; 
+    }
+        
+
+    val = board_.CheckCols(lineLength_);
+
 
 
 

@@ -15,6 +15,8 @@ class Player {
         Player(std::string playerName, int number);
         virtual ~Player() = default;
         virtual void Play(Board & board) = 0; 
+        void MakeWinner(); 
+        bool IsWinner();
 
 };
 

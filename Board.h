@@ -19,8 +19,7 @@ class Board{
         
         std::vector<std::vector<int>> grid_;
 
-        
-        //std::vector<int> getLine(int row, int col, Direction direction) const; 
+    
 
 
     public: 

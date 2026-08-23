@@ -44,9 +44,16 @@ void HumanPlayer::Play(Board & board) {
     int value = number_ == 1? 1 : -1;
     board.setCoordinates(row, col, value);
     
-        
-   
     
-        
+}
 
+
+
+void Player::MakeWinner(){
+    win_ = true;
+}
+
+
+bool Player:: IsWinner(){
+    return win_;
 }
