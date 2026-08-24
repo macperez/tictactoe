@@ -22,6 +22,9 @@ class TicTacToe{
         TicTacToe(int size, int lineLength, std::string player1Name, std::string player2Name="computer");
         void Start();
         void StartTest();
+    
+    private: 
+        void checkWinning(int val); 
         
 
 };

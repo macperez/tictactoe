@@ -54,6 +54,10 @@ void Player::MakeWinner(){
 }
 
 
-bool Player:: IsWinner(){
+bool Player:: IsWinner() const{
     return win_;
+}
+
+const std::string & Player::GetName() const{
+    return name_;
 }

@@ -26,32 +26,54 @@ TicTacToe::TicTacToe( int size, int lineLength, std::string player1Name, std::st
 }
 
 
+void TicTacToe::checkWinning(int val){
+
+    if (val == lineLength_){
+        player1_ -> MakeWinner(); 
+        finished_ = true; 
+    }
+        
+    else if (val == -lineLength_){
+        player2_ -> MakeWinner();
+        finished_= true; 
+    }
+        
+    
+    
+} 
+
 
 void TicTacToe::updateStatus(){
     
-    int val; 
 
     if (board_.IsComplete()){
         finished_ = true; 
         return; 
     }
 
-    val = board_.CheckRows(lineLength_);
+    int val = board_.CheckRows(lineLength_);
 
-    if (val == -lineLength_)
-        player1_ -> MakeWinner(); 
-    else if (val == lineLength_)
-        player2_ -> MakeWinner();
-    
-    if (player1_ -> IsWinner() || player2_ -> IsWinner()){
-        finished_ = true; 
-        return; 
-    }
-        
+    checkWinning(val);
+    if (finished_)
+        return ;
 
     val = board_.CheckCols(lineLength_);
 
+    checkWinning(val);
+    if (finished_)
+        return ;
 
+    val = board_.CheckMainDiagonals(lineLength_);
+
+    checkWinning(val);
+    if (finished_)
+        return ;
+
+    val = board_.CheckSecondaryDiagonals(lineLength_);
+
+    checkWinning(val);
+    if (finished_)
+        return ;
 
 
 }
@@ -78,9 +100,16 @@ void TicTacToe::Start() {
         if (finished_)
             break; 
         
-
-
     }
+    std::cout << "\n\nFinish game!!\n";
+    if (player1_->IsWinner())
+        std::cout << "The winner is " << player1_-> GetName() << "!\n";
+    else if(player2_->IsWinner())
+        std::cout << "The winner is " << player2_-> GetName() << "!\n";
+    else
+        std::cout << "The game ended in a draw!\n";
+
+
 }
 
 
