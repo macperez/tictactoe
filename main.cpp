@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "Game.h"
+#include "TicTacToe.h"
 
 int main()
 {

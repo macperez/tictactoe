@@ -2,42 +2,20 @@
 #include <array>
 #include <limits>
 #include <numeric>
-#include "Game.h"
+#include "TicTacToe.h"
 
 
 
-TicTacToe::TicTacToe(std::string player1Name, std::string player2Name){
+TicTacToe::TicTacToe(std::string player1Name, std::string player2Name)
+{
     player1_ = {player1Name, false};
     player2_ = {player2Name, false};
     pos_counter_ = 0;
     finished_ = false; 
+    
 }
 
 
-void TicTacToe::ShowGrid() const { 
-    for(const std::array<int, 3> & row: grid_){
-        std::cout << "\n\n";
-        for(const int & val: row)
-            switch (val){
-            case -1:
-                std::cout << "X\t";
-                break;
-            case 1:
-                std::cout << "O\t";
-                break;
-            
-            default:
-                std::cout << ".\t";
-                break;
-            }
-    }
-}
-
-bool TicTacToe::validCoordinates(int row, int col) const {
-    row--;
-    col--;
-    return  row >= 0 && row < 3 && col >= 0 && col < 3 && grid_[row][col] == 0;   
-}
 
 void TicTacToe::turnPlayer(int numPlayer){
     std::string name = numPlayer == 1 ? player1_.name:player2_.name;
@@ -47,17 +25,19 @@ void TicTacToe::turnPlayer(int numPlayer){
     bool valid = false; 
     
     while (true){
-        if (std::cin >> row >> col && validCoordinates(row, col))
+        if (std::cin >> row >> col && board_.validCoordinates(row, col))
             break;
         std::cout << "Please enter valid row<space>col, (1-3) (1-3) Ex: 1 4\n";
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
         
-    grid_[--row][--col] = numPlayer == 1 ? 1 :-1;
+    // FIXME: set & get methods 
+    // grid_[--row][--col] = numPlayer == 1 ? 1 :-1;
     pos_counter_++;
 }
 
+/*
 void TicTacToe::updateStatus(){
 
     // check if any movement if possible 
@@ -117,19 +97,23 @@ void TicTacToe::updateStatus(){
 
 }
 
+*/
 
 void TicTacToe::Start() { 
     std::cout << "Starting game...\n";
+    board_.ShowGrid();
 
     //game loop 
+    
+    /*
     while (true){
         turnPlayer(1); 
-        ShowGrid();
+        board_.ShowGrid();
         updateStatus();
         if (finished_)
             break; 
         turnPlayer(2); 
-        ShowGrid();
+        board_.ShowGrid();
         updateStatus();
         if (finished_)
             break; 
@@ -141,5 +125,5 @@ void TicTacToe::Start() {
         std::cout << "\n\n" << player1_.name << " has won!!\n";
     else
         std::cout << "\n\nDRAW!!\n";
-
+    */
 }
