@@ -1,12 +1,11 @@
 #pragma once
 #include <string>
 #include <array> 
+#include <memory>
 #include "Board.h"
+#include "Player.h"
 
-struct Player{
-    std::string name; 
-    bool win; 
-};
+
 
 class TicTacToe{
     private: 
@@ -14,17 +13,19 @@ class TicTacToe{
 
         Board board_;
 
-        int pos_counter_; 
         bool finished_;
-        Player player1_; 
-        Player player2_;
+        std::unique_ptr<Player> player1_;
+        std::unique_ptr<Player> player2_;
+        
 
-        void turnPlayer(int numPlayer);
-        //void updateStatus(); 
+        void updateStatus(); 
 
     public: 
         TicTacToe(std::string player1Name, std::string player2Name="computer");
         void Start();
         
         
+    private: 
+        bool checkWinner(int score);
+
 };

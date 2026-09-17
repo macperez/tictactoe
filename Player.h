@@ -15,6 +15,10 @@ class Player {
         Player(std::string playerName, int number);
         virtual ~Player() = default;
         virtual void Play(Board & board) = 0; 
+        void MakeWinner(); 
+        bool IsWinner() const;
+        const std::string& GetName() const; 
+
 
 };
 
@@ -30,11 +34,11 @@ class HumanPlayer: public Player {
 
 
 // Derived class ComputerPlayer
-class ComputerPlayer: public Player {
-    public:
-        ComputerPlayer(std::string name, int number);
-        //void Play(Board & board) override;
+//class ComputerPlayer: public Player {
+//    public:
+//        ComputerPlayer(std::string name, int number);
+ //       void Play(Board & board) override;
 
-};
+//};
 
 

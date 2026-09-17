@@ -1,5 +1,4 @@
 #include <iostream>
-#include <format>
 #include "Player.h"
 
 
@@ -15,37 +14,49 @@ HumanPlayer::HumanPlayer(std::string name, int number) : Player(name, number)
 }
 
 
+/*
 ComputerPlayer::ComputerPlayer(std::string name, int number) : Player(name, number)
 {
     
 }
 
+*/
 
-
-void HumanPlayer::Play(Board & board) {
+void HumanPlayer::Play(Board & board) 
+{
     // human plays
     int row, col; 
 
     while (true){
-        std::cout << name_ << ", enter coordinates [x] [y]" ;
+        std::cout <<"\n\n"<< name_ << ", enter coordinates [x] [y]: " ;
         std::cin >> row >> col;
         if (board.validCoordinates(row, col)){
             row--; 
             col--;
             break;
         }
-        std::cout << "Please enter valid row<space>col, (1-3) (1-3) Ex: 1 4\n";
-        std::cout << std::format("Please enter valid row<space>col, (1-{}) (1-{}) Ex: 1 4\n", board.GetSize(), board.GetSize());
-
+        std::cout << "Please enter valid row<space>col, (1-3) (1-3) Ex: 1 2\n";
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
-    int value = number_ == 1? 1 : -1;
-    board.setCoordinates(row, col, value);
+    board.SetValue(row, col, number_ == 1? 1 : -1);
     
-        
-   
-    
-        
 
 }
+
+
+bool Player::IsWinner() const
+{
+    return win_; 
+}
+    
+    
+const std::string& Player::GetName() const
+{
+    return name_;
+}
+
+void Player::MakeWinner()
+{
+    win_ = true; 
+} 
