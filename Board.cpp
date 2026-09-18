@@ -66,7 +66,7 @@ void Board :: SetValue(int row, int col, int value)
 
 bool Board :: isCompleted() const 
 {
-    return occupation_ == grid_.size();
+    return occupation_ == 9 ;
 }
 
 int Board :: evalRows() const 

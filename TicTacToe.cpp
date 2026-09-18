@@ -38,14 +38,7 @@ bool TicTacToe::checkWinner(int score)
 
 void TicTacToe::updateStatus(){
 
-    // check if any movement if possible 
-
-    if (board_.isCompleted())
-    {
-        finished_ = true; 
-        return;
-    }
-
+    
     if (checkWinner(board_.evalRows()) || checkWinner(board_.evalCols()) || 
         checkWinner(board_.evalMainDiag()) || checkWinner(board_.evalSecondDiag()))
     {
@@ -53,6 +46,11 @@ void TicTacToe::updateStatus(){
         return;
     }
 
+    if (board_.isCompleted())
+    {
+        finished_ = true; 
+        return;
+    }
 }
 
 
@@ -64,12 +62,10 @@ void TicTacToe::Start() {
 
     //game loop 
     
-    
+
     while (true){    
-        player1_ ->Play(board_);
-        
+        player1_ ->Play(board_);        
         board_.ShowGrid();
-        
         updateStatus();
         
         if (finished_)

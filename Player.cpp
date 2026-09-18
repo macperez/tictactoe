@@ -30,7 +30,7 @@ void HumanPlayer::Play(Board & board)
     while (true){
         std::cout <<"\n\n"<< name_ << ", enter coordinates [x] [y]: " ;
         std::cin >> row >> col;
-        if (board.validCoordinates(row, col)){
+        if (board.validCoordinates(row - 1, col- 1)){
             row--; 
             col--;
             break;
